@@ -1,5 +1,5 @@
 import type { ArrayOf, InstanceOf, StructConstructor } from 'memium';
-import { array, primitive, struct, types as t } from 'memium';
+import { struct, types as t } from 'memium';
 import { styleText } from 'node:util';
 import type { Entries } from 'utilium';
 import { num } from './format.js';
@@ -83,7 +83,7 @@ export class GlobalData extends struct(
 	{
 		type: t.uint32.$type<GlobalDataType>(),
 		length: t.uint32,
-		data: array(primitive.types.uint8).countedBy('length'),
+		data: t.uint8(0).countedBy('length'),
 	},
 	{ isDynamic: true, isPacked: true }
 ) {}
@@ -220,8 +220,13 @@ export function* dumpGlobal<T extends GlobalDataType>(type: T, instance: Instanc
 
 export function dumpTable(table: ArrayOf<GlobalData>) {
 	for (const gd of table) {
-		const global = getGlobal(gd);
-		console.log(`\t${GlobalDataType[gd.type] ?? '<unknown>'}:`);
+		const global = getGlobal(gd),
+			dataTypeName = GlobalDataType[gd.type];
+		if (!dataTypeName) {
+			console.log(`\tunknown type ${gd.type}`);
+			continue;
+		}
+		console.log(`\t${dataTypeName}:`);
 		if (!global) continue;
 
 		for (const line of dumpGlobal(gd.type, global)) console.log('\t\t' + line);

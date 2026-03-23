@@ -26,6 +26,7 @@ const {
 		light: { type: 'boolean', short: 'L', default: false },
 		locationTable: { type: 'boolean', short: 'F', default: false },
 		globals: { type: 'boolean', short: 'G', default: false },
+		changeForms: { type: 'boolean', short: 'C', default: false },
 		formIDs: { type: 'boolean', short: 'I', default: false },
 		all: { type: 'boolean', short: 'a', default: false },
 	},
@@ -149,13 +150,22 @@ if (opts.all || opts.locationTable) {
 	let countLength = 0,
 		offsetLength = 0;
 	for (const [count, offset] of tables) {
-		countLength = Math.max(countLength, num(count, 10).length);
+		countLength = Math.max(countLength, num(count).length);
 		offsetLength = Math.max(offsetLength, num(offset, 16).length);
 	}
 
 	for (const [i, [count, offset]] of tables.entries()) {
-		console.log(`\tglobal data table #${i + 1}: ${num(count, 10).padStart(countLength)} items at ${num(offset, 16).padStart(offsetLength)}`);
+		console.log(`\tglobal data table #${i + 1}: ${num(count).padStart(countLength)} items at ${num(offset, 16).padStart(offsetLength)}`);
 	}
+}
+
+if (opts.all || opts.changeForms) {
+	console.log(
+		'Change Forms:',
+		Object.entries(Object.groupBy(rest.changeForms, (cf) => cf.summary(rest.formVersion)))
+			.map(([summary, forms = []]) => `${num(forms.length)} ${summary}`)
+			.join(', ')
+	);
 }
 
 if (opts.all || opts.globals) {
