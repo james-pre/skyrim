@@ -1,4 +1,6 @@
 {
+	"0000007": "Prisoner (Player) [base]",
+	"00000014": "Prisoner (Player) [ref]",
 	"0001c0f2": "DragonsAbsorbed",
 	"00039e51": "Resist Magic",
 	"0003a2b6": "Damage Magicka",
@@ -84,6 +86,7 @@
 	"00097e1e": "Frost (Horse) [base]",
 	"00097e1f": "Frost (Horse) [ref]",
 	"000aa155": "Absorb Health",
+	"000acbb5": "Banish",
 	"000ae722": "Cure Disease",
 	"000c13d0": "SolitudeBluePalaceFaction",
 	"000e4012": "MS03ChaletOwnershipFaction",

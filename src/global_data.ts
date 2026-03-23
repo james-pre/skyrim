@@ -1,9 +1,10 @@
 import type { ArrayOf, InstanceOf, StructConstructor } from 'memium';
 import { array, primitive, struct, types as t } from 'memium';
-import * as globals from './globals/index.js';
+import { styleText } from 'node:util';
 import type { Entries } from 'utilium';
 import { num } from './format.js';
-import { styleText } from 'node:util';
+import * as globals from './globals/index.js';
+import { get_vsval } from './vsval.js';
 
 export enum GlobalDataType {
 	MiscStats = 0,
@@ -180,8 +181,8 @@ export function* dumpGlobal<T extends GlobalDataType>(type: T, instance: Instanc
 			yield __unknown;
 			return;
 		case GlobalDataType.ProcessLists:
-			for (const [type, { crimes }] of Array.from($.instance.allCrimes).entries()) {
-				yield globals.CrimeType[type] + ':';
+			for (const [type, { count, crimes }] of Array.from($.instance.allCrimes).entries()) {
+				yield `${globals.CrimeType[type]} (${get_vsval(count)}):`;
 				for (const crime of crimes) {
 					yield `\t${num(crime.witnessNum)} witnesses saw ${crime.criminalID.pretty()} commit crime #${num(crime.serialNum)} ${!crime.victimID.formID ? '' : 'against ' + crime.victimID.pretty()}`;
 					if (crime.crimeType == globals.CrimeType.Theft) {
