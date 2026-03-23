@@ -1,0 +1,28 @@
+{
+	"name": "skyrim-edit",
+	"version": "1.0.0",
+	"description": "A best-effort save file viewer and editor for Skyrim (Special Edition)",
+	"license": "GPL-3.0-or-later",
+	"author": "James Prevett <jp@jamespre.dev>",
+	"type": "module",
+	"main": "dist/index.js",
+	"bin": "dist/main.js",
+	"dependencies": {
+		"@types/lz4": "^0.6.4",
+		"@types/node": "^25.0.6",
+		"lz4": "^0.6.5",
+		"lz4-napi": "^2.9.0",
+		"memium": "file:../memium",
+		"prettier": "^3.7.4",
+		"typescript": "^5.9.3",
+		"utilium": "^2.5.8"
+	},
+	"prettier": {
+		"semi": true,
+		"singleQuote": true,
+		"trailingComma": "es5",
+		"printWidth": 180,
+		"useTabs": true,
+		"tabWidth": 4
+	}
+}
