@@ -12,10 +12,8 @@
 		"@types/node": "^25.0.6",
 		"lz4": "^0.6.5",
 		"lz4-napi": "^2.9.0",
-		"memium": "file:../memium",
-		"prettier": "^3.7.4",
-		"typescript": "^5.9.3",
-		"utilium": "^2.5.8"
+		"memium": "^0.4.5",
+		"utilium": "^3.0.0"
 	},
 	"prettier": {
 		"semi": true,
@@ -24,5 +22,9 @@
 		"printWidth": 180,
 		"useTabs": true,
 		"tabWidth": 4
+	},
+	"devDependencies": {
+		"prettier": "^3.8.1",
+		"typescript": "^6.0.2"
 	}
 }
